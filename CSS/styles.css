@@ -457,7 +457,6 @@ img {
 
 .portfolio button {
   font-family: "Roboto", sans-serif;
-  font-style: normal;
   white-space: nowrap;
   font-weight: 500;
   font-size: 16px;
@@ -469,7 +468,8 @@ img {
   border: none;
   cursor: pointer;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio button:hover,
@@ -477,11 +477,8 @@ img {
   background: var(--hover-color);
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
-  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 4px;
-  border: none;
   color: var(--white-color);
+  outline: none;
 }
 /*--portfolio-items-----------*/
 .project-items {
@@ -500,6 +497,12 @@ img {
   width: 370px;
   flex-basis: calc((100% - 60px) / 3);
   position: relative;
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card-animation {
+  overflow: hidden;
+  position: relative;
 }
 
 .overlay-project-card {
@@ -507,21 +510,29 @@ img {
   display: flex;
   justify-items: center;
   align-items: center;
-  height: 0px;
-  bottom: 110px;
-  padding: 24px;
+  height: 100%;
+  bottom: 0px;
+  padding: 63px 24px;
   background-color: rgba(33, 150, 243, 0.9);
   color: #ffffff;
   font-family: "Roboto", sans-serif;
   font-size: 18px;
-  opacity: 0;
-  overflow: hidden;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.03em;
+  transform: translateY(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    550ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-description {
   padding: 20px 24px 20px 24px;
   border: 1px solid #eeeeee;
   border-top: 0;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--text-color);
 }
 
 .project-items h2 {
@@ -533,13 +544,6 @@ img {
   margin-bottom: 4px;
 }
 
-.project-items p {
-  font-style: normal;
-  font-size: 16px;
-  line-height: 1.85;
-  color: var(--text-color);
-}
-
 .project-items-card:hover,
 .project-items-card:focus {
   box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0px 4px 4px rgba(0, 0, 0, 0.06),
@@ -548,12 +552,7 @@ img {
 
 .project-items-card:hover .overlay-project-card,
 .project-items-card:focus .overlay-project-card {
-  opacity: 1;
-  background-color: rgba(33, 150, 243, 0.9);
-  color: #ffffff;
-  height: 294px;
-  transition: height 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0%);
 }
 
 /*--FOOTER-SECTION-------*/
@@ -685,14 +684,12 @@ address li:not(:last-child) {
 }
 
 .mailing-btn {
-  position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-items: center;
   margin-left: 12px;
   background-color: var(--hover-color);
-  padding-left: 28px;
-  padding-right: 62px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 28px 10px 28px;
   border-radius: 4px;
   border: none;
   color: #ffffff;
@@ -702,23 +699,16 @@ address li:not(:last-child) {
   line-height: 30px;
   letter-spacing: 0.06em;
   text-align: center;
-}
-.mailing-btn:hover,
-.mailing-btn:hover {
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.15);
   transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.mailing-btn::after {
-  position: absolute;
-  display: inline-block;
-  content: "";
-  width: 24px;
-  height: 24px;
-  background-image: url(../images/icon\ send.svg);
-  background-repeat: no-repeat;
+.icon-send {
   margin-left: 10px;
-  background-size: contain;
+}
+
+.mailing-btn:focus,
+.mailing-btn:hover {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.15);
 }
 
 .backdrop {
@@ -733,22 +723,29 @@ address li:not(:last-child) {
 }
 
 .backdrop.is-hidden {
-  opacity: 0;
   visibility: hidden;
   pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(0%, -100%) scale(0.01);
+  border-radius: 50%;
 }
 
 .modal {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   width: 528px;
   height: 581px;
   border-radius: 4px;
   background-color: #ffffff;
+  transform: translate(-50%, -50%);
+  opacity: 1;
   box-shadow: 0px, 2px, 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 1px 3px rgba(0, 0, 0, 0.12);
+  transition: transform 1250ms cubic-bezier(0.4, 0, 0.2, 1),
+    1250ms cubic-bezier(0.4, 0, 0.2, 1);
   padding: 40px;
 }
 
@@ -774,6 +771,7 @@ address li:not(:last-child) {
   fill: var(--hover-color);
 }
 
+/*--modal-form--------------------------*/
 .contact-form-field {
   display: block;
   margin-bottom: 10px;
@@ -852,6 +850,7 @@ address li:not(:last-child) {
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
+  letter-spacing: 0.01em;
 }
 
 .contact-form-input-wrapper {
@@ -866,7 +865,7 @@ address li:not(:last-child) {
   left: 12px;
   transform: translateY(-50%);
   fill: #212121;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-form-checkbox-label {
@@ -878,40 +877,47 @@ address li:not(:last-child) {
   line-height: 24px;
   letter-spacing: 0.03em;
   color: var(--text-color);
-  margin-bottom: 30px;
-  position: relative;
 }
 
-.contact-form-checkbox-label::before {
-  display: inline-block;
-  content: "";
+.checkbox-icon-border {
+  display: flex;
+  align-items: center;
+  justify-items: center;
   left: 0px;
   bottom: 0px;
-  width: 16px;
-  height: 15px;
-  outline: none;
   cursor: pointer;
   margin-right: 10px;
-  border: 1px Solid #212121;
+  border: 1px solid #212121;
   border-radius: 2px;
+  background-color: #ffffff;
 }
 
-.contact-form-checkbox:checked + .contact-form-checkbox-label::before {
-  background-image: url(../images/icon\ check.svg);
-  outline: none;
+.checkbox-icon {
+  visibility: hidden;
+}
+
+.contact-form-checkbox:checked + .contact-form-checkbox-label .checkbox-icon {
+  visibility: visible;
+  background-color: var(--hover-color);
   border: none;
 }
 
-/*--background-image: url(../images/icon\ check.svg);--*/
+.contact-form-checkbox:checked
+  + .contact-form-checkbox-label
+  .checkbox-icon-border {
+  border: none;
+}
 
-.contact-form-checkbox:focus + .contact-form-checkbox-label::before {
+.contact-form-checkbox:focus
+  + .contact-form-checkbox-label
+  .checkbox-icon-border {
   outline: 1px solid var(--hover-color);
 }
 
 .contact-form-checkbox-label a {
   color: var(--hover-color);
 }
-
+/*-------------------------------------------*/
 .visually-hidden {
   position: absolute;
   white-space: nowrap;
@@ -927,7 +933,9 @@ address li:not(:last-child) {
 
 .contact-form-submit-btn {
   display: block;
-  margin: 0 auto;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #188ce8;
   padding: 10px 52px;
   border-radius: 4px;
@@ -940,6 +948,7 @@ address li:not(:last-child) {
   letter-spacing: 0.06em;
   text-align: center;
   cursor: pointer;
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-form-submit-btn:focus,
