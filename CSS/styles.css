@@ -565,6 +565,7 @@ footer {
 .column {
   display: flex;
   align-items: baseline;
+  justify-content: space-between;
 }
 
 footer a {
@@ -649,7 +650,7 @@ address li:not(:last-child) {
   margin-left: 93px;
 }
 
-.mailing-conteiner {
+.mailing-form {
   display: flex;
 }
 
@@ -742,8 +743,8 @@ address li:not(:last-child) {
   background-color: #ffffff;
   transform: translate(-50%, -50%);
   opacity: 1;
-  box-shadow: 0px, 2px, 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14),
-    0px 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
   transition: transform 1250ms cubic-bezier(0.4, 0, 0.2, 1),
     1250ms cubic-bezier(0.4, 0, 0.2, 1);
   padding: 40px;
@@ -766,8 +767,8 @@ address li:not(:last-child) {
   transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.modal-close-icon:focus,
-.modal-close-icon:hover {
+.modal-close-btn:focus,
+.modal-close-btn:hover {
   fill: var(--hover-color);
 }
 
@@ -826,6 +827,7 @@ address li:not(:last-child) {
   padding: 12px 16px;
   resize: none;
   transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
 }
 
 .contact-form-message::placeholder {
@@ -851,6 +853,7 @@ address li:not(:last-child) {
   font-size: 12px;
   line-height: 14px;
   letter-spacing: 0.01em;
+  display: block;
 }
 
 .contact-form-input-wrapper {
@@ -871,6 +874,7 @@ address li:not(:last-child) {
 .contact-form-checkbox-label {
   display: flex;
   align-items: center;
+  justify-content: center;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -905,7 +909,7 @@ address li:not(:last-child) {
 .contact-form-checkbox:checked
   + .contact-form-checkbox-label
   .checkbox-icon-border {
-  border: none;
+  border-color: #2196f3;
 }
 
 .contact-form-checkbox:focus
