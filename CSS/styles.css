@@ -565,7 +565,6 @@ footer {
 .column {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
 }
 
 footer a {
@@ -647,7 +646,7 @@ address li:not(:last-child) {
 }
 
 .mailing-wrapper {
-  margin-left: 93px;
+  margin-left: auto;
 }
 
 .mailing-form {
